@@ -1,0 +1,46 @@
+.wrapper-home{
+height: 100vh;
+  width: 100%;
+  overflow: auto;
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  .product {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 0;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    .category {
+      margin-bottom: 20px;
+
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+      }
+    }
+
+    .images {
+      img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+}

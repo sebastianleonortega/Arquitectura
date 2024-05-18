@@ -1,0 +1,11 @@
+<div class="wrapper-login">
+
+  <form [formGroup]=formLogin (submit)="sendFormLogin()">
+  <label > user</label>
+  <input formControlName="email">
+
+  <label > password</label>
+  <input formControlName="password">
+    <button type="submit">enviar</button>
+  </form>
+</div>

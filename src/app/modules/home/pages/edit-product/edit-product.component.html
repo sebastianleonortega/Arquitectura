@@ -1,0 +1,69 @@
+<div class="card">
+   <em (click)="viewCard()">x</em>
+
+
+  <form [formGroup]=formProduct (submit)="sendFormProduct()">
+
+
+    <div class="col-12 md:col-6 lg:col-6">
+      <div class="form-container">
+        <div class="form-group">
+          <label class="form-label">name</label>
+          <input class="form-input"  placeholder="" formControlName="title">
+          <span class="form-line"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 md:col-6 lg:col-6">
+      <div class="form-container">
+        <div class="form-group">
+          <label class="form-label">price</label>
+          <input class="form-input"  placeholder="" formControlName="price">
+          <span class="form-line"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 md:col-6 lg:col-6">
+      <div class="form-container">
+        <div class="form-group">
+          <label class="form-label">description</label>
+          <input class="form-input"  placeholder="" formControlName="description">
+          <span class="form-line"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 md:col-6 lg:col-6">
+      <div class="form-container">
+        <div class="form-group">
+          <label class="form-label">categoryId</label>
+          <input class="form-input"  placeholder="" formControlName="categoryId">
+          <span class="form-line"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 md:col-6 lg:col-6">
+      <div class="form-container">
+        <div class="form-group">
+          <label class="form-label">images</label><em class="icon-plus" (click)="pushImages()"></em>
+          <input class="form-input"  placeholder="" formControlName="images" >
+          <span class="form-line"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 md:col-6 lg:col-6">
+      @for (item of images; track item) {
+        <img ngSrc="{{item}}" alt="" width="300" height="200">
+      }
+    </div>
+
+
+    <button type="submit">enviar</button>
+  </form>
+
+</div>
+

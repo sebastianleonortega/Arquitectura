@@ -1,0 +1,27 @@
+<div class="wrapper-home">
+
+
+  <div class="product-list">
+    <em (click)="viewCard()">cerrar</em>
+    <div *ngFor="let product of products" routerLink="../product/{{product.id}}" class="product">
+      <div class="images">
+        <img [src]="product.images[0]" />
+      </div>
+      <h2>{{ product.title }}</h2>
+      <p> ${{ product.price }}</p>
+      <div class="category">
+        <h3> {{ product.category.name }}</h3>
+      </div>
+
+    </div>
+  </div>
+
+
+  @if (handlerMenu()){
+    <app-edit-product
+      (addedProduct)="addedProduct($event)"
+    />
+  }
+
+
+</div>
