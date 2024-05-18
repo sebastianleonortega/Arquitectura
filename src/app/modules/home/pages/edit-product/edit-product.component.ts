@@ -3,6 +3,7 @@ import {HomeService} from "../../service/home.service";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {NgOptimizedImage} from "@angular/common";
+import {NgSelectModule} from "@ng-select/ng-select";
 
 @Component({
   selector: 'app-edit-product',
@@ -10,7 +11,8 @@ import {NgOptimizedImage} from "@angular/common";
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    NgSelectModule
   ],
   templateUrl: './edit-product.component.html',
   styleUrl: './edit-product.component.scss'
@@ -23,6 +25,7 @@ export class EditProductComponent implements OnInit {
   productId: string | any = '';
 
   images: string[] = []
+  categories : any[] = [];
 
   @Output() addedProduct: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -36,6 +39,7 @@ export class EditProductComponent implements OnInit {
   ngOnInit() {
     this.initFormProduct();
     this.getIdRoute();
+    this.getCategories();
   }
 
   viewCard() {
@@ -59,6 +63,15 @@ export class EditProductComponent implements OnInit {
     })
   }
 
+  getCategories() {
+    this._home.getCategories().subscribe({
+      next: (data) => {
+        this.categories = data
+        console.log(data)
+      }
+    })
+  }
+
   setDataProduct(data: any) {
     this.formProduct.get('title')?.setValue(data['title']);
     this.formProduct.get('price')?.setValue(data['price']);
@@ -72,7 +85,7 @@ export class EditProductComponent implements OnInit {
       title: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
-      categoryId: new FormControl('', [Validators.required]),
+      categoryId: new FormControl(null, [Validators.required]),
       images: new FormControl('', [Validators.required]),
     })
   }
@@ -92,7 +105,6 @@ export class EditProductComponent implements OnInit {
         }
       })
     } else {
-      console.log(data)
       this._home.saveProduct(data).subscribe({
         next: (r) => {
           this.addedProduct.emit(true)
@@ -107,7 +119,13 @@ export class EditProductComponent implements OnInit {
     const img = this.formProduct.get("images")?.value;
     this.formProduct.get("images")?.setValue("");
     this.images.push(img)
+  }
+
+  deleteImage(position: number){
+    console.log(position)
+    this.images.splice(position, 1)
     console.log(this.images)
+
   }
 
 }

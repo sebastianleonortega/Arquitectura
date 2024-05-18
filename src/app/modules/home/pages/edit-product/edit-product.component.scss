@@ -1,11 +1,37 @@
-
-.card{
+.card {
   overflow: hidden;
   border-left: 1px solid blue;
   background-color: white;
   position: absolute;
+  padding: 20px;
   width: 500px;
-  height: 100vh;
+  height: calc(100% - 40px);
   top: 0;
   right: 0;
+
+  .close-modal {
+    position: absolute;
+    font-size: 34px;
+    right: 0;
+    top: 0;
+  }
+
+  .plus-icon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #666;
+
+    &:hover {
+      color: #333;
+    }
+  }
+
+  .show-img{
+    min-height: 310px;
+    overflow: auto;
+  }
+
+
 }

@@ -35,14 +35,11 @@ export class HomeComponent implements OnInit{
   getProduct(){
     this._home.getProduct().subscribe({
       next: (data) => {
-        console.log(data )
         this.products = data;
 
         data.forEach(
           (item: any)=>{
-            console.log(item.images)
             if (item.images[0].startsWith('["')) {
-              console.log('entra')
               item.images = JSON.parse(item.images);
             }
           }
@@ -56,8 +53,6 @@ export class HomeComponent implements OnInit{
 
   viewCard(){
     this.handlerMenu.update( ():boolean => !this.handlerMenu())
-    console.log(this.products)
-    console.log(this.products[129].images[0])
   }
 
   addedProduct(add: boolean){

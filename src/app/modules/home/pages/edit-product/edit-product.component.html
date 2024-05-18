@@ -1,5 +1,5 @@
 <div class="card">
-   <em (click)="viewCard()">x</em>
+   <span class="close-modal icon-close" (click)="viewCard()"></span>
 
 
   <form [formGroup]=formProduct (submit)="sendFormProduct()">
@@ -38,8 +38,16 @@
     <div class="col-12 md:col-6 lg:col-6">
       <div class="form-container">
         <div class="form-group">
-          <label class="form-label">categoryId</label>
-          <input class="form-input"  placeholder="" formControlName="categoryId">
+          <label class="form-label"> categoryId</label>
+          <ng-select [items]="categories"
+                     bindValue="id"
+                     bindLabel="name"
+                     class="custom-two form-ng-select"
+                     formControlName="categoryId"
+                     placeholder="Seleccione una opción"
+                     [searchable]="false">
+          </ng-select>
+
           <span class="form-line"></span>
         </div>
       </div>
@@ -48,21 +56,23 @@
     <div class="col-12 md:col-6 lg:col-6">
       <div class="form-container">
         <div class="form-group">
-          <label class="form-label">images</label><em class="icon-plus" (click)="pushImages()"></em>
-          <input class="form-input"  placeholder="" formControlName="images" >
+          <label class="form-label">images</label>
+          <em class="icon-plus plus-icon" (click)="pushImages()"></em>
+          <input class="form-input input-plus"  placeholder="" formControlName="images" >
           <span class="form-line"></span>
         </div>
       </div>
     </div>
 
-    <div class="col-12 md:col-6 lg:col-6">
+    <div class="col-12  show-img">
       @for (item of images; track item) {
-        <img ngSrc="{{item}}" alt="" width="300" height="200">
+        <em class="icon-trash" (click)="deleteImage($index)"></em>
+        <img ngSrc="{{item}}" alt="" width="300" height="200" >
       }
     </div>
 
 
-    <button type="submit">enviar</button>
+    <button class="btn-general" type="submit">enviar</button>
   </form>
 
 </div>

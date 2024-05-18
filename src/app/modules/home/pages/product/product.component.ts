@@ -51,14 +51,12 @@ export class ProductComponent implements OnInit{
       next: (data) => {
         this.parsedImages =  data.images;
 
-        if (data.images.length > 0 && typeof data.images[0] === 'string' && data.images[0].startsWith('["')) {
+        if (data.images[0].startsWith('["')) {
          this.parsedImages = JSON.parse(data.images);
         }
 
         this.product = data;
         this.parsedImages =  JSON.parse(data.images);
-        console.log(this.parsedImages)
-        console.log(data)
       }
     })
   }

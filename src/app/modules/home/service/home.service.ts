@@ -8,12 +8,15 @@ import {Observable} from "rxjs";
 export class HomeService {
 
   api = 'https://api.escuelajs.co/api/v1/products'
+  apiCategories = 'https://api.escuelajs.co/api/v1/categories'
 
   cardSignal:WritableSignal<boolean> = signal(false)
 
   constructor(
     private _http: HttpClient,
   ) { }
+
+  //product
 
   public getProduct(): Observable<any> {
     return this._http.get<any>(this.api)
@@ -34,4 +37,10 @@ export class HomeService {
   public deleteProduct(id: any): Observable<any> {
     return this._http.delete<any>(this.api+ '/' + id)
   }
+
+  //category
+  public getCategories(): Observable<any> {
+    return this._http.get<any>(this.apiCategories )
+  }
+
 }
