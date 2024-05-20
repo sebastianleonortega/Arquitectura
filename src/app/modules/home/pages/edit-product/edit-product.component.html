@@ -1,44 +1,41 @@
 <div class="card">
-   <span class="close-modal icon-close" (click)="viewCard()"></span>
-
-
+  <span class="close-modal icon-close" (click)="viewCard()"></span>
+  <div class="title">
+    <span>Agregar producto</span>
+  </div>
   <form [formGroup]=formProduct (submit)="sendFormProduct()">
 
-
-    <div class="col-12 md:col-6 lg:col-6">
+    <div class="col-12 ">
       <div class="form-container">
         <div class="form-group">
-          <label class="form-label">name</label>
-          <input class="form-input"  placeholder="" formControlName="title">
-          <span class="form-line"></span>
+          <label class="form-label">Nombre</label>
+          <input class="form-input" appInputMask="alphaNumeric"  placeholder="Ingresa el nombre" formControlName="title">
         </div>
       </div>
     </div>
 
-    <div class="col-12 md:col-6 lg:col-6">
+    <div class="col-12 ">
       <div class="form-container">
         <div class="form-group">
-          <label class="form-label">price</label>
-          <input class="form-input"  placeholder="" formControlName="price">
-          <span class="form-line"></span>
+          <label class="form-label">Descripción</label>
+          <input class="form-input" appInputMask="alphaNumeric"  placeholder="Ingresa una descripción" formControlName="description">
         </div>
       </div>
     </div>
 
-    <div class="col-12 md:col-6 lg:col-6">
+    <div class="col-12 ">
       <div class="form-container">
         <div class="form-group">
-          <label class="form-label">description</label>
-          <input class="form-input"  placeholder="" formControlName="description">
-          <span class="form-line"></span>
+          <label class="form-label">Precio</label>
+          <input class="form-input" appInputMask="integer"  placeholder="Ingresa el precio" formControlName="price">
         </div>
       </div>
     </div>
 
-    <div class="col-12 md:col-6 lg:col-6">
+    <div class="col-12">
       <div class="form-container">
         <div class="form-group">
-          <label class="form-label"> categoryId</label>
+          <label class="form-label"> Categoria</label>
           <ng-select [items]="categories"
                      bindValue="id"
                      bindLabel="name"
@@ -47,30 +44,26 @@
                      placeholder="Seleccione una opción"
                      [searchable]="false">
           </ng-select>
-
-          <span class="form-line"></span>
         </div>
       </div>
     </div>
 
-    <div class="col-12 md:col-6 lg:col-6">
+    <div class="col-12 ">
       <div class="form-container">
         <div class="form-group">
-          <label class="form-label">images</label>
+          <label class="form-label">Url de la imagen</label>
           <em class="icon-plus plus-icon" (click)="pushImages()"></em>
-          <input class="form-input input-plus"  placeholder="" formControlName="images" >
-          <span class="form-line"></span>
+          <input class="form-input input-plus" placeholder="Ingrese la url de la imagen" formControlName="images" >
         </div>
       </div>
     </div>
 
-    <div class="col-12  show-img">
+    <div class="col-12 show-img">
       @for (item of images; track item) {
-        <em class="icon-trash" (click)="deleteImage($index)"></em>
-        <img ngSrc="{{item}}" alt="" width="300" height="200" >
+        <em class="icon-trash icon-absolute" (click)="deleteImage($index)"></em>
+        <img ngSrc="{{item}}" alt="" width="150" height="100" >
       }
     </div>
-
 
     <button class="btn-general" type="submit">enviar</button>
   </form>

@@ -2,8 +2,13 @@ import {Component, EventEmitter, OnInit, Output, WritableSignal} from '@angular/
 import {HomeService} from "../../service/home.service";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
-import {NgOptimizedImage} from "@angular/common";
+import {NgIf, NgOptimizedImage} from "@angular/common";
 import {NgSelectModule} from "@ng-select/ng-select";
+import {InputMaskDirective} from "../../../../core/directives/input-mask.directive";
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-edit-product',
@@ -12,7 +17,13 @@ import {NgSelectModule} from "@ng-select/ng-select";
     FormsModule,
     ReactiveFormsModule,
     NgOptimizedImage,
-    NgSelectModule
+    NgSelectModule,
+    InputMaskDirective,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatIcon,
+    NgIf
   ],
   templateUrl: './edit-product.component.html',
   styleUrl: './edit-product.component.scss'

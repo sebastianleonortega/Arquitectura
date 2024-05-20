@@ -1,6 +1,6 @@
 import {Component, OnInit, WritableSignal} from '@angular/core';
 import {HomeService} from "../../service/home.service";
-import {CommonModule} from "@angular/common";
+import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {EditProductComponent} from "../edit-product/edit-product.component";
 import {Product} from "../../interfaces/product";
@@ -12,6 +12,7 @@ import {Product} from "../../interfaces/product";
     CommonModule,
     RouterLink,
     EditProductComponent,
+    NgOptimizedImage,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.handlerMenu.update( ():boolean => true) //cambiar a false cuando acabe los estilos
+    this.handlerMenu.update( ():boolean => false) //cambiar a false cuando acabe los estilos
     this.getProduct();
   }
 
