@@ -1,17 +1,18 @@
-import {Component, OnInit, WritableSignal} from '@angular/core';
+import {Component, OnInit, signal, WritableSignal} from '@angular/core';
 import {HomeService} from "../../service/home.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgOptimizedImage} from "@angular/common";
 import {EditProductComponent} from "../edit-product/edit-product.component";
 import {Category, Product} from "../../interfaces/product";
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [
-    NgForOf,
-    EditProductComponent
-  ],
+    imports: [
+        NgForOf,
+        EditProductComponent,
+        NgOptimizedImage
+    ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })
@@ -22,6 +23,7 @@ export class ProductComponent implements OnInit{
   product?: Product ;
   productId: string | any = '' ;
   parsedImages: string[] = [];
+  cover = signal('');
 
   constructor(
     private _home: HomeService,
@@ -34,6 +36,10 @@ export class ProductComponent implements OnInit{
     this.getIdRoute();
     this.handlerMenu.update( ():boolean => false)
   }
+  changeCover(newImg: string){
+    this.cover.set(newImg);
+  }
+
 
   getIdRoute(){
     this._route.paramMap.subscribe(params => {
@@ -51,8 +57,14 @@ export class ProductComponent implements OnInit{
       next: (data) => {
         this.parsedImages =  data.images;
 
+        if (data.images.length > 0){
+          this.cover.set(data.images[0])
+        }
+        console.log(data.images[0])
+
         if (data.images[0].startsWith('["')) {
          this.parsedImages = JSON.parse(data.images);
+          this.cover.set(this.parsedImages[0])
         }
 
         this.product = data;

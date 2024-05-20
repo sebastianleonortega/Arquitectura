@@ -9,6 +9,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
+import {AlertService} from "../../../../core/services/alert.service";
 
 @Component({
   selector: 'app-edit-product',
@@ -23,7 +24,7 @@ import {MatIcon} from "@angular/material/icon";
     MatInputModule,
     MatSelectModule,
     MatIcon,
-    NgIf
+    NgIf,
   ],
   templateUrl: './edit-product.component.html',
   styleUrl: './edit-product.component.scss'
@@ -43,6 +44,7 @@ export class EditProductComponent implements OnInit {
   constructor(
     private _home: HomeService,
     private _route: ActivatedRoute,
+    private _alert: AlertService
   ) {
   }
 
@@ -70,6 +72,7 @@ export class EditProductComponent implements OnInit {
     this._home.getProductById(id).subscribe({
       next: (data) => {
         this.setDataProduct(data);
+        console.log(data)
       }
     })
   }
@@ -78,7 +81,6 @@ export class EditProductComponent implements OnInit {
     this._home.getCategories().subscribe({
       next: (data) => {
         this.categories = data
-        console.log(data)
       }
     })
   }
@@ -87,8 +89,7 @@ export class EditProductComponent implements OnInit {
     this.formProduct.get('title')?.setValue(data['title']);
     this.formProduct.get('price')?.setValue(data['price']);
     this.formProduct.get('description')?.setValue(data['description']);
-    this.formProduct.get('categoryId')?.setValue(data['categoryId']);
-    this.formProduct.get('images')?.setValue(data['images']);
+    this.formProduct.get('categoryId')?.setValue(data['category']['id']);
   }
 
   initFormProduct() {
@@ -97,39 +98,61 @@ export class EditProductComponent implements OnInit {
       price: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       categoryId: new FormControl(null, [Validators.required]),
-      images: new FormControl('', [Validators.required]),
+      images: new FormControl('', ),
     })
+  }
+  imageURLValidator(control: FormControl): { [key: string]: boolean } | null {
+    const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?.(jpg|jpeg|png|gif|bmp)$/i;
+    if (!control.value || !urlPattern.test(control.value)) {
+      return { 'invalidImageUrl': true };
+    }
+    return null;
   }
 
   sendFormProduct() {
-    const data: sendData = {
-      title: this.formProduct.get("title")?.value,
-      price: this.formProduct.get("price")?.value,
-      description: this.formProduct.get("description")?.value,
-      categoryId: this.formProduct.get("categoryId")?.value,
-      images: this.images
-    }
-    if (this.productId != null) {
-      this._home.updateProduct(this.productId, data).subscribe({
-        next: (r) => {
-          this.viewCard();
-        }
-      })
-    } else {
-      this._home.saveProduct(data).subscribe({
-        next: (r) => {
-          this.addedProduct.emit(true)
-          this.viewCard();
-        }
-      })
-    }
+    if (this.formProduct.valid) {
+      const data: sendData = {
+        title: this.formProduct.get("title")?.value,
+        price: this.formProduct.get("price")?.value,
+        description: this.formProduct.get("description")?.value,
+        categoryId: this.formProduct.get("categoryId")?.value,
+        images: this.images
+      }
+      console.log(data)
+      if (this.productId != null) {
+        this._home.updateProduct(this.productId, data).subscribe({
+          next: (r) => {
+            this.viewCard();
+            this._alert.success("producto editado")
 
+          }
+        })
+      } else {
+        this._home.saveProduct(data).subscribe({
+          next: (r) => {
+            console.log(data)
+            this.addedProduct.emit(true)
+            this._alert.success("producto agregado")
+            this.viewCard();
+          }
+        })
+      }
+    }else {
+      this._alert.warning("Faltan datos en el formulario")
+    }
   }
 
+
+
   pushImages(){
-    const img = this.formProduct.get("images")?.value;
-    this.formProduct.get("images")?.setValue("");
-    this.images.push(img)
+    const img = this.formProduct.get('images')?.value;
+    if (this.imageURLValidator({ value: img } as FormControl) === null) {
+      this.formProduct.get('images')?.setValue("");
+      this.images.push(img);
+    } else {
+      this.formProduct.get('images')?.setValue("");
+      this._alert.error("url no valida")
+    }
   }
 
   deleteImage(position: number){

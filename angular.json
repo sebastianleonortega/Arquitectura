@@ -31,7 +31,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/assets/fonts/icomoon/style.css"
+              "src/assets/fonts/icomoon/style.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -97,7 +98,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/assets/fonts/icomoon/style.css"
+              "src/assets/fonts/icomoon/style.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           }

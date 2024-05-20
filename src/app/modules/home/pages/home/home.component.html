@@ -5,6 +5,11 @@
     <button class="btn-general" (click)="viewCard()">Agregar producto</button>
   </div>
 
+  <div class="search-container">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar...">
+    <button type="submit" (click)="searchProducts()">Buscar</button>
+  </div>
+
 
   <div class="product-list">
     <div *ngFor="let product of products" routerLink="../product/{{product.id}}" class="product">
@@ -12,9 +17,8 @@
         <img [src]="product.images[0]" />
       </div>
       <h2 class="title">{{ product.title }}</h2>
-      <p> Precio: ${{ product.price }}</p>
+      <p class="price">$ {{ product.price }}</p>
       <div class="category">
-        <h3>Categoria {{ product.category.name }}</h3>
       </div>
 
     </div>

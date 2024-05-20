@@ -3,13 +3,13 @@
   <div class="title">
     <span>Agregar producto</span>
   </div>
-  <form [formGroup]=formProduct (submit)="sendFormProduct()">
+  <form [formGroup]=formProduct >
 
     <div class="col-12 ">
       <div class="form-container">
         <div class="form-group">
           <label class="form-label">Nombre</label>
-          <input class="form-input" appInputMask="alphaNumeric"  placeholder="Ingresa el nombre" formControlName="title">
+          <input class="form-input" placeholder="Ingresa el nombre" formControlName="title">
         </div>
       </div>
     </div>
@@ -18,7 +18,7 @@
       <div class="form-container">
         <div class="form-group">
           <label class="form-label">Descripción</label>
-          <input class="form-input" appInputMask="alphaNumeric"  placeholder="Ingresa una descripción" formControlName="description">
+          <textarea class="custom-textarea" placeholder="Ingresa una descripción" formControlName="description"></textarea>
         </div>
       </div>
     </div>
@@ -52,7 +52,7 @@
       <div class="form-container">
         <div class="form-group">
           <label class="form-label">Url de la imagen</label>
-          <em class="icon-plus plus-icon" (click)="pushImages()"></em>
+          <button class="icon-check plus-icon"  (click)="pushImages()"></button>
           <input class="form-input input-plus" placeholder="Ingrese la url de la imagen" formControlName="images" >
         </div>
       </div>
@@ -60,12 +60,14 @@
 
     <div class="col-12 show-img">
       @for (item of images; track item) {
-        <em class="icon-trash icon-absolute" (click)="deleteImage($index)"></em>
-        <img ngSrc="{{item}}" alt="" width="150" height="100" >
+        <div class="content-img">
+          <em class="icon-trash icon-absolute" (click)="deleteImage($index)"></em>
+          <img ngSrc="{{item}}" alt="" width="150" height="100" >
+        </div>
       }
     </div>
 
-    <button class="btn-general" type="submit">enviar</button>
+    <button class="btn-general" (click)="sendFormProduct()">Enviar</button>
   </form>
 
 </div>

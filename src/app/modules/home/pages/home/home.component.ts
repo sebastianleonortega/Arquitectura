@@ -4,6 +4,8 @@ import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {EditProductComponent} from "../edit-product/edit-product.component";
 import {Product} from "../../interfaces/product";
+import {AlertService} from "../../../../core/services/alert.service";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-home',
@@ -13,51 +15,59 @@ import {Product} from "../../interfaces/product";
     RouterLink,
     EditProductComponent,
     NgOptimizedImage,
+    FormsModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
 
-  handlerMenu: WritableSignal<boolean> =  this._home.cardSignal;
+  handlerMenu: WritableSignal<boolean> = this._home.cardSignal;
   products: Product[] = [];
-  parsedImages: any= []
+  searchTerm : string = "";
 
   constructor(
-    private _home: HomeService
+    private _home: HomeService,
+    private _alert: AlertService
   ) {
   }
 
   ngOnInit() {
-    this.handlerMenu.update( ():boolean => false) //cambiar a false cuando acabe los estilos
+    this.handlerMenu.update((): boolean => false) //cambiar a false cuando acabe los estilos
     this.getProduct();
   }
 
-  getProduct(){
+  searchProducts(): void {
+    const text = this.searchTerm.toLowerCase();
+    this.products = this.products.filter(product =>
+      product.title.toLowerCase().includes(text) ||
+      product.description.toLowerCase().includes(text)
+    );
+  }
+
+
+  getProduct() {
     this._home.getProduct().subscribe({
       next: (data) => {
         this.products = data;
 
         data.forEach(
-          (item: any)=>{
+          (item: any) => {
             if (item.images[0].startsWith('["')) {
               item.images = JSON.parse(item.images);
             }
           }
         )
-
-
-
-    }
+      }
     })
   }
 
-  viewCard(){
-    this.handlerMenu.update( ():boolean => !this.handlerMenu())
+  viewCard() {
+    this.handlerMenu.update((): boolean => !this.handlerMenu())
   }
 
-  addedProduct(add: boolean){
-    if (add ){
+  addedProduct(add: boolean) {
+    if (add) {
       this.getProduct();
     }
   }

@@ -35,7 +35,7 @@
 .form-container {
   border-radius: 4px;
   width: 100%;
-  margin-bottom: 24px;
+  margin-bottom: 10px;
 
   .form-group {
     position: relative;
@@ -53,7 +53,15 @@
       font-weight: 400;
       pointer-events: none;
       margin-bottom: 4px;
-      color: #ff9630;
+      //color: #ff9630;
+    }
+
+    .custom-textarea {
+      height: 150px;
+      padding: 6px;
+      border-radius: 6px;
+      border: 1px solid #5d5252;
+      resize: vertical; /* Permite que el usuario cambie el tamaño verticalmente */
     }
 
     .form-input {
@@ -64,18 +72,9 @@
       font-size: 16px;
       outline: none;
       border-radius: 6px;
-      border: 1px solid #c95623;
+      border: 1px solid #5d5252;
 
-      :focus-visible{
-        border: 1px solid #5d5252;
-      }
-    }
 
-    //PARA EL LABEL QUE HACE LA ANIMACION DE SUBIR
-    .form-input:focus + .form-label, .form-input:not(:placeholder-shown) + .form-label {
-      transform: scale(.90) translateY(-97%) translateX(-10%);
-      padding-bottom: 8px;
-      z-index: 2;
     }
   }
 }
@@ -92,7 +91,7 @@
   border-radius: 6px;
   color: inherit;
   font-size: 14px !important;
-  border: 1px solid #c95623 !important;
+  border: 1px solid #5d5252 !important;
 }
 
 
@@ -131,4 +130,19 @@ ng-select.custom-two {
       box-shadow: none;
     }
   }
+}
+
+//animacion de la alerta
+.toast-container {
+  .ngx-toastr {
+    animation: shake 0.5s ease-in-out forwards;
+  }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px) rotate(-1deg); }
+  50% { transform: translateX(5px) rotate(1deg); }
+  75% { transform: translateX(-5px) rotate(1deg); }
+  100% { transform: translateX(0); }
 }
