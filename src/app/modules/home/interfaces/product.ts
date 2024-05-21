@@ -2,8 +2,6 @@ export interface Category {
   id: number;
   name: string;
   image: string;
-  creationAt: string;
-  updatedAt: string;
 }
 
 export interface Product {
@@ -16,3 +14,12 @@ export interface Product {
   creationAt: string;
   updatedAt: string;
 }
+
+export interface SendDataProduct {
+  title: string,
+  price: number,
+  description: string,
+  categoryId: number,
+  images: string[]
+}
+

@@ -5,10 +5,12 @@ import {authGuard} from "./core/guards/auth.guard";
 import {ProductComponent} from "./modules/home/pages/product/product.component";
 
 export const routes: Routes = [
+
+
   {
     path: '',
     pathMatch: "full",
-    redirectTo: 'login'
+    redirectTo: 'login',
   },
   {
     path: 'login',

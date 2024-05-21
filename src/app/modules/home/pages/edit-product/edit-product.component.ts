@@ -10,6 +10,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {AlertService} from "../../../../core/services/alert.service";
+import {Category} from "../../interfaces/product";
 
 @Component({
   selector: 'app-edit-product',
@@ -39,9 +40,10 @@ export class EditProductComponent implements OnInit {
   productId: string | any = '';
 
   images: string[] = []
-  categories : any[] = [];
+  categories: Category[] = [];
 
   @Output() addedProduct: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() editProduct: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
     private _home: HomeService,
@@ -74,6 +76,7 @@ export class EditProductComponent implements OnInit {
     this._home.getProductById(id).subscribe({
       next: (data) => {
         this.setDataProduct(data);
+        console.log(data)
 
         if (data.images[0].startsWith('["')) {
           this.images = JSON.parse(data.images);
@@ -85,8 +88,8 @@ export class EditProductComponent implements OnInit {
 
   getCategories() {
     this._home.getCategories().subscribe({
-      next: (data) => {
-        this.categories = data
+      next: (data: Category[] ) => {
+        this.categories = data;
       }
     })
   }
@@ -117,7 +120,7 @@ export class EditProductComponent implements OnInit {
 
   sendFormProduct() {
     if (this.formProduct.valid) {
-      const data: sendData = {
+      const data = {
         title: this.formProduct.get("title")?.value,
         price: this.formProduct.get("price")?.value,
         description: this.formProduct.get("description")?.value,
@@ -128,8 +131,8 @@ export class EditProductComponent implements OnInit {
         this._home.updateProduct(this.productId, data).subscribe({
           next: (r) => {
             this.viewCard();
+            this.editProduct.emit(true)
             this._alert.success("producto editado")
-
           }
         })
       } else {
@@ -166,10 +169,3 @@ export class EditProductComponent implements OnInit {
 
 }
 
-interface sendData {
-  title: string,
-  price: number,
-  description: string,
-  categoryId: number,
-  images: string[]
-}

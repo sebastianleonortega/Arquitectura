@@ -1,9 +1,9 @@
 import {Component, OnInit, signal, WritableSignal} from '@angular/core';
 import {HomeService} from "../../service/home.service";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {NgForOf, NgOptimizedImage} from "@angular/common";
+import {NgForOf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
 import {EditProductComponent} from "../edit-product/edit-product.component";
-import {Category, Product} from "../../interfaces/product";
+import {Product} from "../../interfaces/product";
 
 @Component({
   selector: 'app-product',
@@ -12,7 +12,8 @@ import {Category, Product} from "../../interfaces/product";
     NgForOf,
     EditProductComponent,
     NgOptimizedImage,
-    RouterLink
+    RouterLink,
+    TitleCasePipe
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
@@ -57,16 +58,13 @@ export class ProductComponent implements OnInit{
     this._home.getProductById(id).subscribe({
       next: (data) => {
         this.parsedImages =  data.images;
-
         if (data.images.length > 0){
           this.cover.set(data.images[0])
         }
-
         if (data.images[0].startsWith('["')) {
          this.parsedImages = JSON.parse(data.images);
           this.cover.set(this.parsedImages[0])
         }
-
         this.product = data;
         this.parsedImages =  JSON.parse(data.images);
       }
@@ -81,7 +79,7 @@ export class ProductComponent implements OnInit{
     })
   }
 
-  getProduct(add: boolean){
+  editProduct(add: boolean){
     if (add ){
       this.getProductById(this.productId);
     }

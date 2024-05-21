@@ -16,7 +16,7 @@
       <div class="images">
         <img [src]="product.images[0]" />
       </div>
-      <h2 class="title">{{ product.title }}</h2>
+      <h2 class="title">{{ product.title | titlecase }}</h2>
       <p class="price">$ {{ product.price }}</p>
       <div class="category">
       </div>

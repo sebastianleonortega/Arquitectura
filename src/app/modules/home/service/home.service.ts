@@ -1,6 +1,7 @@
 import {Injectable, signal, WritableSignal} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Category, Product, SendDataProduct} from "../interfaces/product";
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,8 @@ export class HomeService {
 
   //product
 
-  public getProduct(): Observable<any> {
-    return this._http.get<any>(this.api)
+  public getProduct(): Observable<Product[]> {
+    return this._http.get<Product[]>(this.api)
   }
 
   public getProductById(id: any): Observable<any> {
@@ -30,17 +31,17 @@ export class HomeService {
     return this._http.put<any>(this.api + '/' + id, data)
   }
 
-  public saveProduct(data: any): Observable<any> {
-    return this._http.post<any>(this.api+ '/' , data)
+  public saveProduct(data: SendDataProduct): Observable<Product> {
+    return this._http.post<Product>(this.api+ '/' , data)
   }
 
-  public deleteProduct(id: any): Observable<any> {
-    return this._http.delete<any>(this.api+ '/' + id)
+  public deleteProduct(id: any): Observable<boolean> {
+    return this._http.delete<boolean>(this.api+ '/' + id)
   }
 
   //category
-  public getCategories(): Observable<any> {
-    return this._http.get<any>(this.apiCategories )
+  public getCategories(): Observable<Category[]> {
+    return this._http.get<Category[]>(this.apiCategories)
   }
 
 }
