@@ -60,7 +60,6 @@ export class ProductComponent implements OnInit{
         if (data.images.length > 0){
           this.cover.set(data.images[0])
         }
-        console.log(data.images[0])
 
         if (data.images[0].startsWith('["')) {
          this.parsedImages = JSON.parse(data.images);

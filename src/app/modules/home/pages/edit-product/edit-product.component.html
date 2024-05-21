@@ -1,7 +1,8 @@
 <div class="card">
   <span class="close-modal icon-close" (click)="viewCard()"></span>
   <div class="title">
-    <span>Agregar producto</span>
+    <span *ngIf="!showTitle">Agregar producto</span>
+    <span *ngIf="showTitle">Editar producto</span>
   </div>
   <form [formGroup]=formProduct >
 

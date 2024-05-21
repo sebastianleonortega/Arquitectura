@@ -10,7 +10,7 @@
 //****** buttons ******//
 .btn-general {
   width: 100%;
-  background-color: red;
+  background-color: #4CAF50;
   color: #fff;
   border: none;
   padding: 10px;
@@ -21,7 +21,7 @@
   margin-top: 10px;
 
   &:hover{
-    background-color: darkred;
+    background-color: #45a049;
   }
 }
 
@@ -53,14 +53,15 @@
       font-weight: 400;
       pointer-events: none;
       margin-bottom: 4px;
-      //color: #ff9630;
     }
 
     .custom-textarea {
+      outline: none;
       height: 150px;
       padding: 6px;
+      font-size: 16px;
       border-radius: 6px;
-      border: 1px solid #5d5252;
+      border: 1px solid #dccece;
       resize: vertical; /* Permite que el usuario cambie el tamaño verticalmente */
     }
 
@@ -72,7 +73,7 @@
       font-size: 16px;
       outline: none;
       border-radius: 6px;
-      border: 1px solid #5d5252;
+      border: 1px solid #dccece;
 
 
     }
@@ -91,13 +92,14 @@
   border-radius: 6px;
   color: inherit;
   font-size: 14px !important;
-  border: 1px solid #5d5252 !important;
+  border: 1px solid #dccece !important;
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-placeholder{
+  font-size: 16px;
 }
 
 
-.ng-select.custom-multiple .ng-select-container .ng-value-container .ng-placeholder {
-  top: 10px;
-}
 
 app-column-filter {
   position: relative;

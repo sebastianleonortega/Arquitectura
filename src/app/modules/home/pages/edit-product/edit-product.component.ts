@@ -33,6 +33,8 @@ export class EditProductComponent implements OnInit {
 
   handlerMenu: WritableSignal<boolean> = this._home.cardSignal;
 
+  showTitle: boolean = false;
+
   formProduct: FormGroup = new FormGroup({});
   productId: string | any = '';
 
@@ -72,7 +74,11 @@ export class EditProductComponent implements OnInit {
     this._home.getProductById(id).subscribe({
       next: (data) => {
         this.setDataProduct(data);
-        console.log(data)
+
+        if (data.images[0].startsWith('["')) {
+          this.images = JSON.parse(data.images);
+        }
+        this.showTitle = true;
       }
     })
   }

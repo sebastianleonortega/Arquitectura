@@ -1,13 +1,13 @@
 <div class="wrapper-home">
 
   <div class="header">
-    <img ngSrc="assets/images/logo.jpeg" alt="" height="50" width="50">
+    <img ngSrc="assets/images/login.jpg" alt="" height="50" width="50">
     <button class="btn-general" (click)="viewCard()">Agregar producto</button>
   </div>
 
   <div class="search-container">
-    <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar...">
-    <button type="submit" (click)="searchProducts()">Buscar</button>
+    <input type="text" (keyup.enter)="searchProducts()" [(ngModel)]="searchTerm" placeholder="Buscar...">
+    <button type="submit"  (click)="searchProducts()">Buscar</button>
   </div>
 
 

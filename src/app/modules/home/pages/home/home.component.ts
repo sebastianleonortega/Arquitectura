@@ -39,10 +39,14 @@ export class HomeComponent implements OnInit {
 
   searchProducts(): void {
     const text = this.searchTerm.toLowerCase();
-    this.products = this.products.filter(product =>
-      product.title.toLowerCase().includes(text) ||
-      product.description.toLowerCase().includes(text)
-    );
+    if (text === ""){
+      this.getProduct();
+    }else {
+      this.products = this.products.filter(product =>
+        product.title.toLowerCase().includes(text) ||
+        product.description.toLowerCase().includes(text)
+      );
+    }
   }
 
 
@@ -50,6 +54,8 @@ export class HomeComponent implements OnInit {
     this._home.getProduct().subscribe({
       next: (data) => {
         this.products = data;
+
+        console.log(data)
 
         data.forEach(
           (item: any) => {
