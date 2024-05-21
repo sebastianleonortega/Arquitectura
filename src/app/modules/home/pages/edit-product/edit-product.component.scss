@@ -1,11 +1,11 @@
 .card {
-  overflow: hidden;
-  border-left: 1px solid #c95623;
+  border-left: 1px solid #776258;
   background-color: white;
   position: absolute;
-  padding: 20px;
+  padding: 0px 20px;
   width: 400px;
-  height: calc(100% - 40px);
+  height: 100%;
+  overflow: auto;
   top: 0;
   right: 0;
 
@@ -13,9 +13,9 @@
     display: flex;
     justify-content: center;
     font-size: 24px;
-    margin-bottom: 10px;
+    margin: 10px 0;
     font-weight: 600;
-    color: #c95623;
+    color: #776258;
   }
 
   .close-modal {
@@ -24,6 +24,7 @@
     font-size: 34px;
     right: 4px;
     top: 4px;
+    color: #776258;
 
     &:hover {
       color: red;
@@ -39,7 +40,7 @@
     top: 26px;
     cursor: pointer;
     font-size: 30px;
-    color: green;
+    color: #776258;
     background-color: white;
 
   }
@@ -48,11 +49,8 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    min-height: 230px;
-    max-height: 230px;
-    overflow: auto;
+    //min-height: 120px;
     gap: 4px;
-    position: relative;
 
     .content-img {
       position: relative;
@@ -77,9 +75,8 @@
   }
 
   .btn-general {
-    position: absolute;
-    width: 90%;
-    bottom: 10px;
+    width: 100%;
+    margin-bottom: 10px;
 
   }
 

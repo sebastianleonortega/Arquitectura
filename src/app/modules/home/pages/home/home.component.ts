@@ -55,7 +55,6 @@ export class HomeComponent implements OnInit {
       next: (data) => {
         this.products = data;
 
-        console.log(data)
 
         data.forEach(
           (item: any) => {

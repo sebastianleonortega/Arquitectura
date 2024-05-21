@@ -1,6 +1,6 @@
 import {Component, OnInit, signal, WritableSignal} from '@angular/core';
 import {HomeService} from "../../service/home.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {NgForOf, NgOptimizedImage} from "@angular/common";
 import {EditProductComponent} from "../edit-product/edit-product.component";
 import {Category, Product} from "../../interfaces/product";
@@ -8,11 +8,12 @@ import {Category, Product} from "../../interfaces/product";
 @Component({
   selector: 'app-product',
   standalone: true,
-    imports: [
-        NgForOf,
-        EditProductComponent,
-        NgOptimizedImage
-    ],
+  imports: [
+    NgForOf,
+    EditProductComponent,
+    NgOptimizedImage,
+    RouterLink
+  ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })

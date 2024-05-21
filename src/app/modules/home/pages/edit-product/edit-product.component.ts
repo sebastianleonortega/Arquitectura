@@ -124,7 +124,6 @@ export class EditProductComponent implements OnInit {
         categoryId: this.formProduct.get("categoryId")?.value,
         images: this.images
       }
-      console.log(data)
       if (this.productId != null) {
         this._home.updateProduct(this.productId, data).subscribe({
           next: (r) => {
@@ -136,7 +135,6 @@ export class EditProductComponent implements OnInit {
       } else {
         this._home.saveProduct(data).subscribe({
           next: (r) => {
-            console.log(data)
             this.addedProduct.emit(true)
             this._alert.success("producto agregado")
             this.viewCard();
@@ -162,9 +160,7 @@ export class EditProductComponent implements OnInit {
   }
 
   deleteImage(position: number){
-    console.log(position)
     this.images.splice(position, 1)
-    console.log(this.images)
 
   }
 

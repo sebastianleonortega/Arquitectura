@@ -7,6 +7,11 @@ import {ProductComponent} from "./modules/home/pages/product/product.component";
 export const routes: Routes = [
   {
     path: '',
+    pathMatch: "full",
+    redirectTo: 'login'
+  },
+  {
+    path: 'login',
     component: LoginComponent
   },
   {
