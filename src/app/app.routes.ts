@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 import {LoginComponent} from "./modules/auth/login/login.component";
 import {HomeComponent} from "./modules/home/pages/home/home.component";
 import {authGuard} from "./core/guards/auth.guard";
@@ -25,5 +25,9 @@ export const routes: Routes = [
     path: 'product/:id',
     component: ProductComponent,
     canActivate: [authGuard]
+  },
+  {
+    path: '**',
+    component: HomeComponent,
   }
 ];
