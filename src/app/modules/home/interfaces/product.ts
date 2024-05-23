@@ -23,3 +23,7 @@ export interface SendDataProduct {
   images: string[]
 }
 
+export interface Login {
+  email: string,
+  password: string
+}

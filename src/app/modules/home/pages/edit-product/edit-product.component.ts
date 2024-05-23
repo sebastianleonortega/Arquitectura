@@ -67,6 +67,7 @@ export class EditProductComponent implements OnInit {
     this._route.paramMap.subscribe(params => {
       this.productId = params.get('id');
       if (this.productId != null) {
+        console.log(this.productId)
         this.getProductById(this.productId);
       }
     })
@@ -76,7 +77,6 @@ export class EditProductComponent implements OnInit {
     this._home.getProductById(id).subscribe({
       next: (data) => {
         this.setDataProduct(data);
-        console.log(data)
 
         if (data.images[0].startsWith('["')) {
           this.images = JSON.parse(data.images);
@@ -149,8 +149,6 @@ export class EditProductComponent implements OnInit {
     }
   }
 
-
-
   pushImages(){
     const img = this.formProduct.get('images')?.value;
     if (this.imageURLValidator({ value: img } as FormControl) === null) {
@@ -164,7 +162,6 @@ export class EditProductComponent implements OnInit {
 
   deleteImage(position: number){
     this.images.splice(position, 1)
-
   }
 
 }

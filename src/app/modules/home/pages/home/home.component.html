@@ -12,15 +12,15 @@
 
 
   <div class="product-list">
-    <div *ngFor="let product of products" routerLink="../product/{{product.id}}" class="product">
+    <div class="product" *ngFor="let product of products"  routerLink="../product/{{product.id}}" >
       <div class="images">
+        <em class="icon-heart"></em>
         <img [src]="product.images[0]" />
       </div>
-      <h2 class="title">{{ product.title | titlecase }}</h2>
-      <p class="price">$ {{ product.price }}</p>
-      <div class="category">
+      <div class="info-product">
+        <span class="title">{{ product.title | titlecase }}</span>
+        <p class="price">$ {{ product.price }}</p>
       </div>
-
     </div>
   </div>
 

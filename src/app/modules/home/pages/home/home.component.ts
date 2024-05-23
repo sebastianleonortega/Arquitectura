@@ -6,6 +6,7 @@ import {EditProductComponent} from "../edit-product/edit-product.component";
 import {Product} from "../../interfaces/product";
 import {AlertService} from "../../../../core/services/alert.service";
 import {FormsModule} from "@angular/forms";
+import {LoadingService} from "../../../../core/services/loading.service";
 
 @Component({
   selector: 'app-home',
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private _home: HomeService,
-    private _alert: AlertService
+    private _loader: LoadingService
   ) {
   }
 
@@ -49,12 +50,12 @@ export class HomeComponent implements OnInit {
     }
   }
 
-
   getProduct() {
+    this._loader.show();
     this._home.getProduct().subscribe({
       next: (data) => {
         this.products = data;
-
+        this._loader.hide();
 
         data.forEach(
           (item: any) => {

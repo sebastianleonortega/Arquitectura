@@ -18,10 +18,14 @@
     </div>
 
     <div class="content-info">
-      <h1>{{ product?.title | titlecase}} <em class="icon-pencil" (click)="viewCard()"></em> <em class="icon-trash" (click)="deleteProduct()"></em></h1>
+      <h1>{{ product?.title | titlecase}} </h1>
       <p class="description">{{ product?.description }}</p>
       <p class="price">$ {{ product?.price }}</p>
       <img class="payment-img" src="/assets/images/pagos.png" alt="metodos de pago">
+      <div class="content-btn">
+        <button (click)="viewCard()" class="btn-general"><em class="icon-pencil" ></em> Editar</button>
+        <button (click)="deleteProduct()" class="btn-general"><em class="icon-trash" ></em> Eliminar</button>
+      </div>
     </div>
   </div>
 </div>

@@ -4,6 +4,8 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {NgForOf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
 import {EditProductComponent} from "../edit-product/edit-product.component";
 import {Product} from "../../interfaces/product";
+import {AlertService} from "../../../../core/services/alert.service";
+import {LoadingService} from "../../../../core/services/loading.service";
 
 @Component({
   selector: 'app-product',
@@ -31,6 +33,8 @@ export class ProductComponent implements OnInit{
     private _home: HomeService,
     private _route: ActivatedRoute,
     private _router: Router,
+    private _alert: AlertService,
+    private _loader: LoadingService
   ) {
   }
 
@@ -55,6 +59,7 @@ export class ProductComponent implements OnInit{
   }
 
   getProductById(id : any){
+    this._loader.show();
     this._home.getProductById(id).subscribe({
       next: (data) => {
         this.parsedImages =  data.images;
@@ -66,15 +71,19 @@ export class ProductComponent implements OnInit{
           this.cover.set(this.parsedImages[0])
         }
         this.product = data;
+        this._loader.hide();
         this.parsedImages =  JSON.parse(data.images);
       }
     })
   }
 
   deleteProduct(){
+    this._loader.show();
     this._home.deleteProduct(this.productId).subscribe({
       next: () => {
         this._router.navigateByUrl('/home').then();
+        this._alert.success("Producto eliminado")
+        this._loader.hide();
       }
     })
   }
